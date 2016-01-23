@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>spotspot</title>
 </head>
 <body>
-
+	<h1>spotspot</h1>
+	{% for lot in lots %}
+	<div class="lot">
+		<img src={{ lot.image_url }}>
+		<p>{{ lot.address }}</p>
+		<p>Fill level: {{ lot.fill_level }}
+	</div>
+	<br>
+	{% endfor %}
 </body>
 </html>
