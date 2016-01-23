@@ -17,7 +17,7 @@ class Lot(Base):
 	
 	__tablename__ = 'lot'
 	id = Column(Integer, primary_key = True)
-	address = Column(String(250))
+	address = Column(String)
 	capacity = Column(Integer)
 	fill_level = Column(Integer, default = 0)
 	image_url = Column(String)
@@ -31,6 +31,7 @@ class Destination(Base):
 	
 	__tablename__ = 'destination'
 	id = Column(Integer, primary_key = True)
+	name = Column(String)
 	address = Column(String)
 	lots = relationship("Lot",
 		secondary = associate_lot_destination,
