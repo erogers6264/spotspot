@@ -1,5 +1,15 @@
-
 from spotspot import app
+from flask import render_template, request
+
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from models import Lot, Destination, Base 
+
+engine = create_engine('sqlite:///lots.db')
+Base.metadata.bind = engine
+
+DBsession = sessionmaker(bind=engine)
+session = DBsession()
 
 
 @app.route('/')
