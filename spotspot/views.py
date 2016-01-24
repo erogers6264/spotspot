@@ -5,7 +5,9 @@ from flask_googlemaps import Map
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import Lot, Base 
+from models import Lot, Base
+
+from spothelper import getCoordinates
 
 engine = create_engine('sqlite:///lots.db')
 Base.metadata.bind = engine
@@ -14,8 +16,11 @@ DBsession = sessionmaker(bind=engine)
 session = DBsession()
 
 
-@app.route('/map/<destination_id>/')
-def showMap(destination_id):
+@app.route('/map/')
+def showMap():
+    if request.method == 'POST':
+        
+
     # creating a map in the view
     lots = []
 
@@ -25,7 +30,7 @@ def showMap(destination_id):
         lng=-122.1419,
         markers=[(37.4419, -122.1419)]
     )
-    return render_template('map.html', mymap=mymap, sndmap=sndmap)
+    return render_template('map.html', mymap=mymap)
 
 
 @app.route('/lots/')
@@ -37,6 +42,7 @@ def allLots():
 @app.route('/lots/new/', methods=['GET', 'POST'])
 def newLot():
     if request.method == 'POST':
+        print(request.form['address'])
         newLot = Lot(address=request.form['address'],
             image_url=request.form['image_url'],
             capacity=request.form['capacity']
@@ -84,4 +90,5 @@ def enterAddress():
 @app.route('/lots/<int:lot_id>/')
 @app.route('/lots/<int:lot_id>/info/')
 def lotInfo(lot_id):
-    return render_template('lotinfo.html')
+    lot = session.query(Lot).filter_by(id=lot_id).one()
+    return render_template('lotinfo.html', lot=lot)
