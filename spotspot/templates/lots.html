@@ -12,7 +12,7 @@
 		<p>{{ lot.address }}</p>
 		<p>Capacity: {{ lot.capacity }}
 		<a href={{ url_for('editLot', lot_id=lot.id) }}>Edit</a>
-		<a href="#">Delete</a>
+		<a href={{ url_for('deleteLot', lot_id=lot.id) }}>Delete</a>
 	</div>
 	<br>
 	{% endfor %}
