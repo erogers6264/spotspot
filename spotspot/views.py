@@ -85,6 +85,3 @@ def enterAddress():
 @app.route('/lots/<int:lot_id>/info/')
 def lotInfo(lot_id):
     return render_template('lotinfo.html')
-
-
-

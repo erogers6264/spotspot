@@ -19,4 +19,5 @@ class Lot(Base):
 	image_url = Column(String)
 
 
+engine = create_engine('sqlite:///lots.db')
 Base.metadata.create_all(engine)

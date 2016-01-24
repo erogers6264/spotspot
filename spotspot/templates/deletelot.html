@@ -8,7 +8,7 @@
 	<p>Are you sure you would like to delete {{ lot.address }}</p>
 	<form method="POST" action={{ url_for('deleteLot', lot_id = lot.id) }}>
 		<input type="submit" value="Yes">
-		<a href="#">Cancel</a>
+		<a href={{ url_for('allLots') }}>Cancel</a>
 	</form>
 </body>
 </html>
