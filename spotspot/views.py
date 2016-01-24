@@ -20,13 +20,14 @@ session = DBsession()
 def showMap(destination_id):
     destination = session.query(Destination).filter_by(id=destination_id).one()
     # creating a map in the view
-    lots = []
+    lots = session.query(Lot).all()
+    markers = {'http://maps.google.com/mapfiles/ms/icons/blue-dot.png':[(lot.lat, lot.lng)] for lot in lots}
 
     mymap = Map(
         identifier="destination",
         lat=destination.lat,
         lng=destination.lng,
-        markers=[(destination.lat, destination.lng)]
+        markers=markers
     )
     return render_template('map.html', mymap=mymap)
 
@@ -40,15 +41,21 @@ def allLots():
 @app.route('/lots/new/', methods=['GET', 'POST'])
 def newLot():
     if request.method == 'POST':
-        newLot = Lot(address=request.form['address'],
+        address = request.form['address']
+        coords = getCoordinates(address)
+        newLot = Lot(address=address,
             image_url=request.form['image_url'],
-            capacity=request.form['capacity']
+            capacity=request.form['capacity'],
+            lat=coords[0],
+            lng=coords[1]
             )
+
         session.add(newLot)
         session.commit()
         return redirect(url_for('allLots'))
     else:
         return render_template('newlot.html')
+
 
 @app.route('/lots/<int:lot_id>/edit/', methods=['GET', 'POST'])
 def editLot(lot_id):
@@ -56,6 +63,8 @@ def editLot(lot_id):
         edited_lot = session.query(Lot).filter_by(id=lot_id).one()
         if request.form['address']:
             edited_lot.address = request.form['address']
+            coords = getCoordinates(edited_lot.address)
+            edited_lot.lat, edited_lot.lng = coords[0], coords[1]
         if request.form['image_url']:
             edited_lot.image_url = request.form['image_url']
         if request.form['capacity']:
@@ -67,6 +76,7 @@ def editLot(lot_id):
         lot = session.query(Lot).filter_by(id=lot_id).one()
         return render_template('editlot.html', lot=lot)
 
+
 @app.route('/lots/<int:lot_id>/delete/', methods=['GET', 'POST'])
 def deleteLot(lot_id):
     if request.method == 'POST':
@@ -77,6 +87,7 @@ def deleteLot(lot_id):
     else:
         lot = session.query(Lot).filter_by(id=lot_id).one()
         return render_template('deletelot.html', lot=lot)
+
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/destination/', methods=['GET', 'POST'])
