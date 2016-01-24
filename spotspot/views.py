@@ -5,7 +5,7 @@ from flask_googlemaps import Map
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import Lot, Destination, Base 
+from models import Lot, Base 
 
 engine = create_engine('sqlite:///lots.db')
 Base.metadata.bind = engine
@@ -64,10 +64,16 @@ def editLot(lot_id):
         lot = session.query(Lot).filter_by(id=lot_id).one()
         return render_template('editlot.html', lot=lot)
 
-@app.route('/lots/<int:lot_id>/delete/')
+@app.route('/lots/<int:lot_id>/delete/', methods=['GET', 'POST'])
 def deleteLot(lot_id):
-    lot = session.query(Lot).first()
-    return render_template('deletelot.html', lot=lot)
+    if request.method == 'POST':
+        lot_to_delete = session.query(Lot).filter_by(id=lot_id).one()
+        session.delete(lot_to_delete)
+        session.commit()
+        return redirect(url_for('allLots'))
+    else:
+        lot = session.query(Lot).filter_by(id=lot_id).one()
+        return render_template('deletelot.html', lot=lot)
 
 @app.route('/')
 @app.route('/destination/')

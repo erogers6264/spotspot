@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
  
-from models import Lot, Base, Destination
+from models import Lot, Base
  
 engine = create_engine('sqlite:///lots.db')
 Base.metadata.bind = engine
