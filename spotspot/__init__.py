@@ -1,6 +1,10 @@
 from flask import Flask
 app = Flask('spotspot')
 
+from flask_googlemaps import GoogleMaps
+GoogleMaps(app)
+
+
 import spotspot.views
 
 if __name__ == '__main__':
