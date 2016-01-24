@@ -11,7 +11,7 @@
 		<img src={{ lot.image_url }}>
 		<p>{{ lot.address }}</p>
 		<p>Capacity: {{ lot.capacity }}
-		<a href="#">Edit</a>
+		<a href={{ url_for('editLot', lot_id=lot.id) }}>Edit</a>
 		<a href="#">Delete</a>
 	</div>
 	<br>

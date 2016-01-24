@@ -47,10 +47,22 @@ def newLot():
     else:
         return render_template('newlot.html')
 
-@app.route('/lots/<int:lot_id>/edit/')
+@app.route('/lots/<int:lot_id>/edit/', methods=['GET', 'POST'])
 def editLot(lot_id):
-    lot = session.query(Lot).first()
-    return render_template('editlot.html', lot=lot)
+    if request.method == 'POST':
+        edited_lot = session.query(Lot).filter_by(id=lot_id).one()
+        if request.form['address']:
+            edited_lot.address = request.form['address']
+        if request.form['image_url']:
+            edited_lot.image_url = request.form['image_url']
+        if request.form['capacity']:
+            edited_lot.capacity = request.form['capacity']
+        session.add(edited_lot)
+        session.commit()
+        return redirect(url_for('allLots'))
+    else:
+        lot = session.query(Lot).filter_by(id=lot_id).one()
+        return render_template('editlot.html', lot=lot)
 
 @app.route('/lots/<int:lot_id>/delete/')
 def deleteLot(lot_id):

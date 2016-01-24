@@ -1,6 +1,6 @@
 <body>
 	<img src={{ url_for('static', filename="icon.png") }}>
-	<form method="POST" action={{ url_for('newLot') }}>
+	<form method="POST" action={{ url_for('editLot', lot_id=lot.id) }}>
 		<fieldset>
 		<legend>Edit Parking Lot:</legend>
 		<input type="text" name="address" placeholder={{ lot.address }}>
