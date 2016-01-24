@@ -1,5 +1,5 @@
 from spotspot import app
-from flask import render_template, request
+from flask import render_template, request, redirect, url_for
 
 from flask_googlemaps import Map
 
@@ -34,17 +34,28 @@ def allLots():
     return render_template('lots.html', lots=lots)
 
 
-@app.route('/lots/new/')
+@app.route('/lots/new/', methods=['GET', 'POST'])
 def newLot():
-    return render_template('newlot.html')
+    if request.method == 'POST':
+        newLot = Lot(address=request.form['address'],
+            image_url=request.form['image_url'],
+            capacity=request.form['capacity']
+            )
+        session.add(newLot)
+        session.commit()
+        return redirect(url_for('allLots'))
+    else:
+        return render_template('newlot.html')
 
 @app.route('/lots/<int:lot_id>/edit/')
 def editLot(lot_id):
-    return render_template('editlot.html')
+    lot = session.query(Lot).first()
+    return render_template('editlot.html', lot=lot)
 
 @app.route('/lots/<int:lot_id>/delete/')
 def deleteLot(lot_id):
-    return render_template('deletelot.html')
+    lot = session.query(Lot).first()
+    return render_template('deletelot.html', lot=lot)
 
 @app.route('/')
 @app.route('/destination/')
@@ -55,7 +66,7 @@ def enterAddress():
 @app.route('/lots/<int:lot_id>/')
 @app.route('/lots/<int:lot_id>/info/')
 def lotInfo(lot_id):
-	return render_template('lotinfo.html')
+    return render_template('lotinfo.html')
 
 
 
