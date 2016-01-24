@@ -13,7 +13,7 @@ associate_lot_destination = Table('lot_destination', Base.metadata,
 )
 
 class Lot(Base):
-	"""A simple classsc for the parking lots in the database"""
+	"""A simple class for the parking lots in the database"""
 	
 	__tablename__ = 'lot'
 	id = Column(Integer, primary_key = True)
@@ -21,13 +21,14 @@ class Lot(Base):
 	capacity = Column(Integer)
 	fill_level = Column(Integer, default = 0)
 	image_url = Column(String)
+
 	destinations = relationship("Destination",
 		secondary = associate_lot_destination,
 		back_populates = 'lots')
 
 
 class Destination(Base):
-	"""Information about a space"""
+	"""Information about a place to go"""
 	
 	__tablename__ = 'destination'
 	id = Column(Integer, primary_key = True)
