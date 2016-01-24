@@ -1,23 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>{{ lot.address }}</title>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Information</title>
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href={{ url_for('static', filename="css/normalize.css") }}>
+  <link rel="stylesheet" href={{ url_for('static', filename="css/skeleton.css") }}>
+  <link rel="stylesheet" href={{ url_for('static', filename="css/style.css") }}>
 </head>
 <body>
-	<div class="info">
-		<h1>{{ lot.address }}</h1>
-		<img src={{ lot.image_url }}>
-		<div class="fill_level">
+  <div class="container">
+    <div class="row">
+      <div class="one-half column" style="margin-top: 25%">
+        <div class="info">
+			<h1>{{ lot.address }}</h1>
+			<img src={{ lot.image_url }}>
+			<div class="fill_level">
+			</div>
+			<p>Distance delta through Google API</p>
 		</div>
-		<p>Distance delta through Google API</p>
-	</div>
-	<div id="payment">
-		<div class="total">
-			<h3>Total</h3>
-			<p>Time</p>
-			<p>Price</p>
+		<div id="payment">
+			<div class="total">
+				<h3>Total</h3>
+				<p>Time</p>
+				<p>Price</p>
+			</div>
 		</div>
-	</div>
-
+      </div>
+    </div>
+  </div>
 </body>
 </html> 

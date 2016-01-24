@@ -5,7 +5,7 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Delete</title>
+  <title>Your page title here :)</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -19,26 +19,28 @@
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href={{ url_for('static', filename="css/normalize.css") }}>
-  <link rel="stylesheet" href={{ url_for('static', filename="css/skeleton.css") }}>
-  <link rel="stylesheet" href={{ url_for('static', filename="css/style.css") }}>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
 
 </head>
 <body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
     <div class="row">
       <div class="one-half column" style="margin-top: 25%">
-        <img src={{ url_for('static', filename="icon.png") }}>
-        <form method="POST" action={{ url_for('deleteLot', lot_id=lot.id) }}>
-          <fieldset>
-          <legend>Delete Parking Lot:</legend>
-        <p>Are you sure you would like to delete {{ lot.address }}?</p>
-          <input type="submit" value="Yes">
-          <a href={{ url_for('allLots') }}>Cancel</a>
-        </form>
+        <h4>Basic Page</h4>
+        <p>This index.html page is a placeholder with the CSS, font and favicon. It's just waiting for you to add some content! If you need some help hit up the <a href="http://www.getskeleton.com">Skeleton documentation</a>.</p>
       </div>
     </div>
   </div>
 
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
 </html>

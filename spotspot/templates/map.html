@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-    <html>
-    <head>
-        {{mymap.js}}
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Lots</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href={{ url_for('static', filename="css/normalize.css") }}>
+  <link rel="stylesheet" href={{ url_for('static', filename="css/skeleton.css") }}>
+  <link rel="stylesheet" href={{ url_for('static', filename="css/style.css") }}>
+    {{mymap.js}}
     </head>
     <body>
-        <h1>Parking near your destination</h1>
+      <div class="container">
+    <div class="row">
+      <div class="one-half column" style="margin-top: 10%">
+        <a href="{{url_for('enterAddress')}}">Go Back</a>
         {{mymap.html}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="one-half column">
+        <h1>Parking near your destination</h1>
+        <a href="{{url_for('allLots')}}">View list</a>
+      </div>
+    </div>
+  </div>
     </body>
 </html>

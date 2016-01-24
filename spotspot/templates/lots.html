@@ -1,21 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>spotspot</title>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Lots</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href={{ url_for('static', filename="css/normalize.css") }}>
+  <link rel="stylesheet" href={{ url_for('static', filename="css/skeleton.css") }}>
+  <link rel="stylesheet" href={{ url_for('static', filename="css/style.css") }}>
+
 </head>
 <body>
-	<h1>Spotalot</h1>
-	<h3><a href={{ url_for('newLot') }}>Add new lot</a></h3>
-	{% for lot in lots %}
-	<div class="lot">
-		<img src={{ lot.image_url }}>
-		<p><a href={{url_for('lotInfo', lot_id = lot.id)}}>{{ lot.address }}</a></p>
-		<p>Capacity: {{ lot.capacity }}
-		<a href={{ url_for('editLot', lot_id=lot.id) }}>Edit</a>
-		<a href={{ url_for('deleteLot', lot_id=lot.id) }}>Delete</a>
-	</div>
-	<br>
-	<br>
-	{% endfor %}
+  <div class="container">
+    <div class="row">
+      <div class="one-half column" style="margin-top: 25%">
+        <img src={{ url_for('static', filename='images/logo.png') }}>
+        <h3><a href={{ url_for('newLot') }} class="button">Add new lot</a></h3>
+        <h3><a href={{ url_for('enterAddress') }} class="button">Go park</a></h3>
+        {% for lot in lots %}
+        <div class="lot">
+          <img src={{ lot.image_url }}>
+          <p><a href={{url_for('lotInfo', lot_id = lot.id)}}>{{ lot.address }}</a></p>
+          <p>Capacity: {{ lot.capacity }}
+          <a href={{ url_for('editLot', lot_id=lot.id) }}>Edit</a>
+          <a href={{ url_for('deleteLot', lot_id=lot.id) }}>Delete</a>
+        </div>
+        <br>
+        <br>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 </body>
 </html>

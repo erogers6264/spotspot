@@ -21,7 +21,10 @@ def showMap(destination_id):
     destination = session.query(Destination).filter_by(id=destination_id).one()
     # creating a map in the view
     lots = session.query(Lot).all()
+
     markers = {'http://maps.google.com/mapfiles/ms/icons/blue-dot.png':[(lot.lat, lot.lng)] for lot in lots}
+    markers.update({'http://maps.google.com/mapfiles/ms/icons/green-dot.png':[(destination.lat, destination.lng)]})
+    
 
     mymap = Map(
         identifier="destination",

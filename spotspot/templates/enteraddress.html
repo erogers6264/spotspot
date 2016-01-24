@@ -1,15 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Enter Destination</title>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Enter Destination</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href={{ url_for('static', filename="css/normalize.css") }}>
+  <link rel="stylesheet" href={{ url_for('static', filename="css/skeleton.css") }}>
+  <link rel="stylesheet" href={{ url_for('static', filename="css/style.css") }}>
 </head>
 <body>
-	<img src={{ url_for('static', filename='logo.png') }}>
-	<form method="POST" action="{{ url_for('enterAddress')}}">
-		<input type="text" name="destination" placeholder="Enter destination">
-		<input type="submit" value="Go park">
-	</form>
-	<br>
-	<a href={{ url_for('allLots') }}>Browse lots</a>
+  <div class="container">
+    <div class="row">
+      <div class="one-half column" style="margin-top: 25%">
+        <img src={{ url_for('static', filename='images/logo.png') }}>
+        <form method="POST" action="{{ url_for('enterAddress')}}">
+          <input type="text" name="destination" placeholder="Enter destination">
+          <input type="submit" value="Go park">
+        </form>
+        <a href={{ url_for('allLots') }}>Browse lots</a>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

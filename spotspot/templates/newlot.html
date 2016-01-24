@@ -1,19 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title></title>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>New Lot</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href={{ url_for('static', filename="css/normalize.css") }}>
+  <link rel="stylesheet" href={{ url_for('static', filename="css/skeleton.css") }}>
+  <link rel="stylesheet" href={{ url_for('static', filename="css/style.css") }}>
+
 </head>
 <body>
-	<img src={{ url_for('static', filename="icon.png") }}>
-	<form method="POST" action={{ url_for('newLot') }}>
-		<fieldset>
-		<legend>New Parking Lot:</legend>
-		<input type="text" name="address" placeholder="Parking Lot Address">
-		<input type="text" name="capacity" placeholder="Capacity">
-		<input type="text" name="image_url" placeholder="Image URL">
-		<input type="submit" value="Create lot">
-		<a href={{ url_for('allLots') }}>Cancel</a>
-		</fieldset>
-	</form>
+<div class="container">
+    <div class="row">
+      <div class="one-half column" style="margin-top: 25%">
+        <img src={{ url_for('static', filename="icon.png") }}>
+        <form method="POST" action={{ url_for('newLot') }}>
+          <fieldset>
+          <legend>New Parking Lot:</legend>
+          <input type="text" name="address" placeholder="Parking Lot Address">
+          <input type="text" name="capacity" placeholder="Capacity">
+          <input type="text" name="image_url" placeholder="Image URL">
+          <input type="submit" value="Create lot">
+          <a href={{ url_for('allLots') }}>Cancel</a>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+	
 </body>
 </html>
