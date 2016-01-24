@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Enter Destination</title>
 </head>
 <body>
-
+	<img src={{ url_for('static', filename='logo.png') }}>
+	<form method="GET" action='#'>
+		<input type="text" name="destination" placeholder="Enter destination">
+		<input type="submit" value="Go park">
+	</form>
 </body>
 </html>

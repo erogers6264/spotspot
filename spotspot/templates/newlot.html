@@ -4,6 +4,15 @@
 	<title></title>
 </head>
 <body>
-
+	<img src={{ url_for('static', filename="icon.png") }}>
+	<form method="POST" action={{ url_for('newLot') }}>
+		<fieldset>
+		<legend>New Parking Lot:</legend>
+		<input type="text" name="address" placeholder="Parking Lot Address">
+		<input type="text" name="capacity" placeholder="Capacity">
+		<input type="text" name="image_url" placeholder="Image URL">
+		<input type="submit" value="Create lot">
+		</fieldset>
+	</form>
 </body>
 </html>

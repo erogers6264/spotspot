@@ -4,12 +4,15 @@
 	<title>spotspot</title>
 </head>
 <body>
-	<h1>spotspot</h1>
+	<h1>Spotalot</h1>
+	<h3><a href={{ url_for('newLot') }}>Add new lot</a></h3>
 	{% for lot in lots %}
 	<div class="lot">
 		<img src={{ lot.image_url }}>
 		<p>{{ lot.address }}</p>
-		<p>Fill level: {{ lot.fill_level }}
+		<p>Capacity: {{ lot.capacity }}
+		<a href="#">Edit</a>
+		<a href="#">Delete</a>
 	</div>
 	<br>
 	{% endfor %}
