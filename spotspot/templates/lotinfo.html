@@ -4,7 +4,20 @@
 	<title>{{ lot.address }}</title>
 </head>
 <body>
-	<h1>{{ lot.address }}</h1>
+	<div class="info">
+		<h1>{{ lot.address }}</h1>
+		<img src={{ lot.image_url }}>
+		<div class="fill_level">
+		</div>
+		<p>Distance delta through Google API</p>
+	</div>
+	<div id="payment">
+		<div class="total">
+			<h3>Total</h3>
+			<p>Time</p>
+			<p>Price</p>
+		</div>
+	</div>
 
 </body>
-</html>
+</html> 

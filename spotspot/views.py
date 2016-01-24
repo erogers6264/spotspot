@@ -5,7 +5,7 @@ from flask_googlemaps import Map
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import Lot, Base
+from models import Lot, Base, Destination
 
 from spothelper import getCoordinates
 
@@ -16,19 +16,17 @@ DBsession = sessionmaker(bind=engine)
 session = DBsession()
 
 
-@app.route('/map/')
-def showMap():
-    if request.method == 'POST':
-        
-
+@app.route('/map/<destination_id>')
+def showMap(destination_id):
+    destination = session.query(Destination).filter_by(id=destination_id).one()
     # creating a map in the view
     lots = []
 
     mymap = Map(
-        identifier="view-side",
-        lat=37.4419,
-        lng=-122.1419,
-        markers=[(37.4419, -122.1419)]
+        identifier="destination",
+        lat=destination.lat,
+        lng=destination.lng,
+        markers=[(destination.lat, destination.lng)]
     )
     return render_template('map.html', mymap=mymap)
 
@@ -42,7 +40,6 @@ def allLots():
 @app.route('/lots/new/', methods=['GET', 'POST'])
 def newLot():
     if request.method == 'POST':
-        print(request.form['address'])
         newLot = Lot(address=request.form['address'],
             image_url=request.form['image_url'],
             capacity=request.form['capacity']
@@ -81,10 +78,18 @@ def deleteLot(lot_id):
         lot = session.query(Lot).filter_by(id=lot_id).one()
         return render_template('deletelot.html', lot=lot)
 
-@app.route('/')
-@app.route('/destination/')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/destination/', methods=['GET', 'POST'])
 def enterAddress():
-    return render_template('enteraddress.html')
+    if request.method == 'POST':
+        destination = Destination(address=request.form['destination'])
+        coords = getCoordinates(destination.address)
+        destination.lat, destination.lng = coords[0], coords[1]
+        session.add(destination)
+        session.commit()
+        return redirect(url_for('showMap', destination_id=destination.id))
+    else:
+        return render_template('enteraddress.html')
 
 
 @app.route('/lots/<int:lot_id>/')

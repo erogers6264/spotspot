@@ -5,9 +5,11 @@
 </head>
 <body>
 	<img src={{ url_for('static', filename='logo.png') }}>
-	<form method="GET" action='#'>
+	<form method="POST" action="{{ url_for('enterAddress')}}">
 		<input type="text" name="destination" placeholder="Enter destination">
 		<input type="submit" value="Go park">
 	</form>
+	<br>
+	<a href={{ url_for('allLots') }}>Browse lots</a>
 </body>
 </html>

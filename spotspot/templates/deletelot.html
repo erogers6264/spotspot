@@ -4,9 +4,11 @@
 	<title>Delete</title>
 </head>
 <body>
-	<h1>Delete lot</h1>
-	<p>Are you sure you would like to delete {{ lot.address }}</p>
-	<form method="POST" action={{ url_for('deleteLot', lot_id = lot.id) }}>
+	<img src={{ url_for('static', filename="icon.png") }}>
+	<form method="POST" action={{ url_for('deleteLot', lot_id=lot.id) }}>
+		<fieldset>
+		<legend>Delete Parking Lot:</legend>
+	<p>Are you sure you would like to delete {{ lot.address }}?</p>
 		<input type="submit" value="Yes">
 		<a href={{ url_for('allLots') }}>Cancel</a>
 	</form>

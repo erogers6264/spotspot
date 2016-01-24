@@ -9,7 +9,7 @@
 	{% for lot in lots %}
 	<div class="lot">
 		<img src={{ lot.image_url }}>
-		<p>{{ lot.address }}</p>
+		<p><a href={{url_for('lotInfo', lot_id = lot.id)}}>{{ lot.address }}</a></p>
 		<p>Capacity: {{ lot.capacity }}
 		<a href={{ url_for('editLot', lot_id=lot.id) }}>Edit</a>
 		<a href={{ url_for('deleteLot', lot_id=lot.id) }}>Delete</a>
