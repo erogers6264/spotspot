@@ -19,12 +19,13 @@ session = DBsession()
 @app.route('/map/<destination_id>')
 def showMap(destination_id):
     destination = session.query(Destination).filter_by(id=destination_id).one()
-    # creating a map in the view
+    #  creating a map in the view
     lots = session.query(Lot).all()
 
-    markers = {'http://maps.google.com/mapfiles/ms/icons/blue-dot.png':[(lot.lat, lot.lng)] for lot in lots}
-    markers.update({'http://maps.google.com/mapfiles/ms/icons/green-dot.png':[(destination.lat, destination.lng)]})
-    
+    markers = {'http://maps.google.com/mapfiles/ms/icons/blue-dot.png':
+               [(lot.lat, lot.lng)] for lot in lots}
+    markers.update({'http://maps.google.com/mapfiles/ms/icons/green-dot.png':
+                   [(destination.lat, destination.lng)]})
 
     mymap = Map(
         identifier="destination",
@@ -47,11 +48,10 @@ def newLot():
         address = request.form['address']
         coords = getCoordinates(address)
         newLot = Lot(address=address,
-            image_url=request.form['image_url'],
-            capacity=request.form['capacity'],
-            lat=coords[0],
-            lng=coords[1]
-            )
+                     image_url=request.form['image_url'],
+                     capacity=request.form['capacity'],
+                     lat=coords[0],
+                     lng=coords[1])
 
         session.add(newLot)
         session.commit()
