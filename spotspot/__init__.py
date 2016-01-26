@@ -1,11 +1,11 @@
 from flask import Flask
+from flask_googlemaps import GoogleMaps
 app = Flask('spotspot')
 
-from flask_googlemaps import GoogleMaps
+import spotspot.views
+
 GoogleMaps(app)
 
-
-import spotspot.views
 
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
